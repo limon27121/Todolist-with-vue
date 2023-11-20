@@ -24,7 +24,7 @@
         <!-- buttons -->
         <div class="clearBtns">
           <button>Clear completed</button>
-          <button>Clear all</button>
+          <button @click="clearall">Clear all</button>
         </div>
         <!-- pending task -->
         <div class="pendingTasks">
@@ -37,10 +37,42 @@
   <script>
   export default {
     name: "Task",
-    props:["tasks"],
+    // props:["tasks"],
     data(){
       return{
-        task:""
+        task:"",
+        tasks: [
+        {
+          id: 1,
+          title: "Learn Vue JS",
+          completed: true,
+        },
+        {
+          id: 2,
+          title: "Watch netflix",
+          completed: true,
+        },
+        {
+          id: 3,
+          title: "Go shopping",
+          completed: false,
+        },
+        {
+          id: 4,
+          title: "Learn guitar",
+          completed: false,
+        },
+        {
+          id: 5,
+          title: "Send email",
+          completed: false,
+        },
+      ],
+      }
+    },
+    methods:{
+      clearall(){
+        this.tasks=[]
       }
     }
   };
