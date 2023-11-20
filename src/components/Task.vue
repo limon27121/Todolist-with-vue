@@ -7,7 +7,7 @@
         </div>
         <!-- form -->
         <div class="form">
-          <input type="text" placeholder="New Task" v-model="Newtask"/>
+          <input type="text" placeholder="New Task" v-model="Newtask" @keyup.enter="addtask"/>
           <button @click="addtask()"><i class="fas fa-plus"></i></button>
         </div>
         <!-- task lists -->
@@ -17,7 +17,7 @@
               <span class="circle-icon"><i class="far fa-circle"></i></span>
               <button>
                 {{ task.title }}</button>
-              <button><i class="far fa-trash-alt"></i></button>
+              <button @click="deleteTask(task)"><i class="far fa-trash-alt"></i></button>
             </li>
            
           </ul>
@@ -115,6 +115,12 @@
 
     clear() {
   this.tasks = this.tasks.filter((task) => !task.completed);
+},
+deleteTask(task){
+  const index = this.tasks.indexOf(task);
+    if (index !== -1) {
+      this.tasks.splice(index, 1);
+    }
 }
     }
   };
