@@ -14,9 +14,11 @@
         <div class="taskItems">
           <ul>
             <li v-for="task in tasks" :key="task.id">
-              <span class="circle-icon"><i class="far fa-circle"></i></span>
-              <button>
-                {{ task.title }}</button>
+              <span class="circle-icon" @click="toggleTaskStatus(task)">
+      <i :class="{ 'far fa-circle': !task.completed, 'fas fa-check-circle':task.completed }"></i>
+    </span>
+              
+                <span :class="classname(task)">{{ task.title }}</span>
               <button @click="deleteTask(task)"><i class="far fa-trash-alt"></i></button>
             </li>
            
@@ -45,7 +47,18 @@
       //find the inprogress work length
      incomplete(){
       return this.tasks.filter(this.isprogress).length
-     }
+     },
+
+    //  classname() {
+    //   return (task) => {
+    //     let cls = ["toggle"];
+    //     if (task.completed) {
+    //       cls.push("toggle-completed");
+    //     }
+    //     return cls;
+    //   };
+    // },
+
     },
     data(){
       return{
@@ -87,7 +100,7 @@
               completed: false,
               });
           
-      this.Newtask = ""; // Clear the input after adding the task
+      this.Newtask = ""; // Clear the input after adding the 
     }
    else{
     alert("invalid input")
@@ -113,15 +126,30 @@
     //   })
     // }
 
-    clear() {
+  clear() {
   this.tasks = this.tasks.filter((task) => !task.completed);
 },
+
 deleteTask(task){
   const index = this.tasks.indexOf(task);
     if (index !== -1) {
       this.tasks.splice(index, 1);
     }
-}
+},
+
+toggleTaskStatus(task) {
+      task.completed = !task.completed;
+    },
+
+
+//line through style acitivated 
+    classname(task) {
+      let cls = ["toggle"];
+      if (task.completed) {
+        cls.push("toggle-completed");
+      }
+      return cls;
+    }
     }
   };
   </script>
